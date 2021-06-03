@@ -24,5 +24,10 @@ module.exports = function () {
   //Updating the project
   router.get("/proyecto/editar/:id", proyectosController.fomularioEditar);
 
+  router.post(
+    "/nuevo-proyecto/:id",
+    body("nombre").not().isEmpty().trim().escape(),
+    proyectosController.actualizarProyecto
+  );
   return router;
 };
