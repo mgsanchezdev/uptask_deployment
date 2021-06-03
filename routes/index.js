@@ -6,6 +6,7 @@ const proyectosController = require("../controllers/proyectosController");
 
 module.exports = function () {
   //Route to home
-  router.get("/",proyectosController.proyectosHome);
+  router.get("/", proyectosController.proyectosHome);
+  router.get("/nuevo-proyecto", proyectosController.formularioProyecto);
   return router;
 };
