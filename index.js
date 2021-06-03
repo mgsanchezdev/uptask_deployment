@@ -1,13 +1,9 @@
 const express = require("express");
+const routes = require("./routes");
 
 //Create an express app
 const app = express();
 
-
-
-//Route to home
-app.use('/',(req,res)=>{
-    res.json("Hola")
-})
+app.use("/", routes());
 
 app.listen(3000);
