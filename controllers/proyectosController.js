@@ -12,7 +12,7 @@ exports.formularioProyecto = async (req, res) => {
   const proyectos = await Proyectos.findAll();
   res.render("nuevoProyecto", {
     nombrePagina: "Nuevo Proyecto",
-    proyectos
+    proyectos,
   });
 };
 
@@ -33,7 +33,7 @@ exports.nuevoProyecto = async (req, res) => {
     res.render("nuevoProyecto", {
       nombrePagina: "Nuevo Proyecto",
       errores,
-      proyectos
+      proyectos,
     });
   } else {
     //No errors, you have to insert in the database
@@ -44,18 +44,43 @@ exports.nuevoProyecto = async (req, res) => {
 };
 
 exports.proyectoPorUrl = async (req, res, next) => {
-  const proyectos = await Proyectos.findAll();
+  const proyectosPromise = Proyectos.findAll();
 
-  const proyecto = await Proyectos.findOne({
+  const proyectoPromise = Proyectos.findOne({
     where: {
       url: req.params.url,
     },
   });
+
+  const [proyectos, proyecto] = await Promise.all([
+    proyectosPromise,
+    proyectoPromise,
+  ]);
   if (!proyecto) return next();
   //render at sight
   res.render("tareas", {
     nombrePagina: "Tareas del Proyecto",
     proyecto,
-    proyectos
+    proyectos,
+  });
+};
+
+exports.fomularioEditar = async (req, res) => {
+  const proyectosPromise = Proyectos.findAll();
+
+  const proyectoPromise = Proyectos.findOne({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  const [proyectos, proyecto] = await Promise.all([
+    proyectosPromise,
+    proyectoPromise,
+  ]);
+  res.render("nuevoProyecto", {
+    nombrePagina: "Editar Proyecto",
+    proyectos,
+    proyecto,
   });
 };
