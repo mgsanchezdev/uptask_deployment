@@ -12,7 +12,7 @@ exports.formularioProyecto = (req, res) => {
   });
 };
 
-exports.nuevoProyecto = (req, res) => {
+exports.nuevoProyecto = async (req, res) => {
   //We are going to send to the console what the user types
 
   //validate that we have something in the field
@@ -31,8 +31,8 @@ exports.nuevoProyecto = (req, res) => {
     });
   } else {
     //No errors, you have to insert in the database
-    Proyectos.create({ nombre })
-      .then(() => console.log("insertado correctamente"))
-      .catch((error) => console.log(error));
+   
+    const proyecto = await Proyectos.create({ nombre});
+    res.redirect("/");
   }
 };
