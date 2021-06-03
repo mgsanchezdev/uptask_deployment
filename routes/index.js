@@ -6,6 +6,7 @@ const { body } = require("express-validator/check");
 
 // Import the controller
 const proyectosController = require("../controllers/proyectosController");
+const Proyectos = require("../models/Proyectos");
 
 module.exports = function () {
   //Route to home
@@ -16,5 +17,8 @@ module.exports = function () {
     body("nombre").not().isEmpty().trim().escape(),
     proyectosController.nuevoProyecto
   );
+
+  //list proyect
+  router.get("/proyectos/:url", proyectosController.proyectoPorUrl);
   return router;
 };
