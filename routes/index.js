@@ -8,5 +8,6 @@ module.exports = function () {
   //Route to home
   router.get("/", proyectosController.proyectosHome);
   router.get("/nuevo-proyecto", proyectosController.formularioProyecto);
+  router.post("/nuevo-proyecto", proyectosController.nuevoProyecto);
   return router;
 };
