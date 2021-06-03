@@ -1,8 +1,10 @@
 const Proyectos = require("../models/Proyectos");
 
-exports.proyectosHome = (req, res) => {
+exports.proyectosHome = async(req, res) => {
+  const proyectos = await Proyectos.findAll();
   res.render("index", {
     nombrePagina: "Proyectos",
+    proyectos
   });
 };
 
@@ -31,8 +33,8 @@ exports.nuevoProyecto = async (req, res) => {
     });
   } else {
     //No errors, you have to insert in the database
-   
-    const proyecto = await Proyectos.create({ nombre});
+
+    const proyecto = await Proyectos.create({ nombre });
     res.redirect("/");
   }
 };
