@@ -9,6 +9,7 @@ const db = require("./config/db");
 
 //import the model
 require("./models/Proyectos");
+require("./models/Tareas");
 
 db.sync()
   .then(() => {

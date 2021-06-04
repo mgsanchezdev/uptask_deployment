@@ -4,7 +4,7 @@ const db = new Sequelize("uptasknode", "mario", "123456", {
   host: "localhost",
   dialect: "mysql",
   port: "3306",
-  operatorsAliases: false,
+  operatorsAliases: 0,
   define: {
     timestamps: false,
   },
