@@ -9,10 +9,22 @@ block contenido
                 input.nombre-tarea(type= "text" name= "tarea" placeholder="Nombre de tarea")
             .campo.enviar
                 input.boton.nueva-tarea(type="submit" value= "Agregar")
-
-
-        //TODO pending list
-        // pre= vardump(proyecto)
+        
+        .listado-pendientes
+            ul
+                if tareas.length 
+                    each tarea in tareas 
+                        li.tarea 
+                            p= tarea.tarea
+                            .acciones
+                                if tarea.estado
+                                    i.far.fa-check-circle.completo 
+                                else
+                                    i.far.fa-check-circle
+                                i.fas.fa-trash 
+                else 
+                    p No hay tareas en este proyecto               
+        // pre= vardump(tareas)
 
         // actions that can be performed
 
