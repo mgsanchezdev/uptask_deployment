@@ -25,6 +25,8 @@ exports.crearCuenta = async (req, res) => {
     res.render("crearCuenta", {
       mensajes: req.flash(),
       nombrePagina: "Crear cuenta en UpTask",
+      email,
+      password,
     });
   }
 };
