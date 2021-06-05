@@ -10,6 +10,7 @@ const { body } = require("express-validator");
 const proyectosController = require("../controllers/proyectosController");
 const Proyectos = require("../models/Proyectos");
 const tareasController = require("../controllers/tareasController");
+const usuariosController = require("../controllers/usuariosController");
 
 module.exports = function () {
   //Route to home
@@ -46,3 +47,6 @@ router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
   router.delete('/tareas/:id',tareasController.eliminarTarea)
   return router;
 };
+
+//Create new account
+router.get('/crear-cuenta',usuariosController.formCrearCuenta)
