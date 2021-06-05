@@ -50,3 +50,5 @@ router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
 
 //Create new account
 router.get('/crear-cuenta',usuariosController.formCrearCuenta)
+
+router.post('/crear-cuenta',usuariosController.crearCuenta)

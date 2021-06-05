@@ -9,10 +9,10 @@ html(lang="en")
             form#formulario.caja.caja-login(method="POST" action="/crear-cuenta")
                 .campo  
                     label(for="email") Email 
-                    input(type="email" name = "email" placeholder="Tu Email")
+                    input(type="email" name = "email" placeholder="Tu Email" required)
                 .campo
                     label(for="email") Password
-                    input(type="password" name = "password" placeholder="Tu Pasword")
+                    input(type="password" name = "password" placeholder="Tu Pasword" required)
                 .campo.enviar
                     input.boton(type="submit" value = "Crear Cuenta")
                 .campo 
