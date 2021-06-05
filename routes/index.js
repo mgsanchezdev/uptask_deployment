@@ -37,7 +37,12 @@ module.exports = function () {
   router.delete("/proyectos/:url", proyectosController.eliminarProyecto);
 
   //task
-
   router.post("/proyectos/:url", tareasController.agregarTarea);
+
+  //update task  
+router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
+
+  //delete task  
+  router.delete('/tareas/:id',tareasController.eliminarTarea)
   return router;
 };
