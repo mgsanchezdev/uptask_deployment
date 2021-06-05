@@ -4,8 +4,11 @@ html(lang="en")
         include partials/header
     body.login
         .contenedor-fomulario   
-            h1 Incia Sesión en UpTask 
+            h1 Inciar Sesión en UpTask 
 
+            if error
+                p.alerta.error= error 
+            
             form#formulario.caja.caja-login(method="POST" action="/iniciar-sesion")
                 .campo  
                     label(for="email") Email 

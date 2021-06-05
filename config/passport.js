@@ -18,8 +18,6 @@ passport.use(
         const usuario = await Usuarios.findOne({
           where: { email: email },
         });
-
-        console.log("password", password);
         //El usuario existe pero password incorrecto
         if (!usuario.verificarPassword(password)) {
           return done(null, false, {
@@ -30,7 +28,6 @@ passport.use(
         return done(null, usuario);
       } catch (error) {
         //Ese usuario no existe
-        console.log("paso el por catch");
         return done(null, false, {
           message: "Esa cuenta no existe",
         });
