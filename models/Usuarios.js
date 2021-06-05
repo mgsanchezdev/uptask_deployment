@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../config/db");
 const Proyectos = require("../models/Proyectos");
 const bcrypt = require("bcrypt-nodejs");
+const passport = require("passport");
 
 const Usuarios = db.define(
   "usuarios",
@@ -49,6 +50,10 @@ const Usuarios = db.define(
   }
 );
 
+//Metodos personalizados
+Usuarios.prototype.verificarPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 Usuarios.hasMany(Proyectos); //A user can have multiple projects
 
 module.exports = Usuarios;

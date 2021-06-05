@@ -6,6 +6,7 @@ const helpers = require("./helpers");
 const flash = require("connect-flash");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const passport = require("./config/passport");
 // const expressValidator = require("express-validator");
 
 //Create the connection to the database
@@ -23,7 +24,6 @@ db.sync()
   .catch((error) => console.log(error));
 //Create an express app
 const app = express();
-
 
 //Where to load static files
 app.use(express.static("public"));
@@ -53,7 +53,9 @@ app.use(
   })
 );
 
+app.use(passport.initialize()); //Arranca una instancia de passport
 
+app.use(passport.session());//Importante que este despues de session
 
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump;
