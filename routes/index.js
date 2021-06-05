@@ -11,6 +11,7 @@ const proyectosController = require("../controllers/proyectosController");
 const Proyectos = require("../models/Proyectos");
 const tareasController = require("../controllers/tareasController");
 const usuariosController = require("../controllers/usuariosController");
+const authController = require("../controllers/authController");
 
 module.exports = function () {
   //Route to home
@@ -45,13 +46,15 @@ module.exports = function () {
 
   //delete task
   router.delete("/tareas/:id", tareasController.eliminarTarea);
+
+  //Create new account
+  router.get("/crear-cuenta", usuariosController.formCrearCuenta);
+
+  router.post("/crear-cuenta", usuariosController.crearCuenta);
+
+  //log in
+  router.get("/iniciar-sesion", usuariosController.formIniciarSesion);
+  router.post("/iniciar-sesion", authController.autenticarUsuario);
+
   return router;
 };
-
-//Create new account
-router.get("/crear-cuenta", usuariosController.formCrearCuenta);
-
-router.post("/crear-cuenta", usuariosController.crearCuenta);
-
-//log in
-router.get("/iniciar-sesion", usuariosController.formIniciarSesion);

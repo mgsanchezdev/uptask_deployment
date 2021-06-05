@@ -7,7 +7,7 @@ exports.formCrearCuenta = (req, res) => {
 };
 
 exports.formIniciarSesion = (req, res) => {
-  res.render("inicarSesion", {
+  res.render("iniciarSesion", {
     nombrePagina: "Iniciar Sesión en UpTask",
   });
 };
@@ -23,7 +23,7 @@ exports.crearCuenta = async (req, res) => {
       email,
       password,
     });
-    res.redirect("/inicar-sesion");
+    res.redirect("/iniciar-sesion");
   } catch (error) {
     req.flash(
       "error",
