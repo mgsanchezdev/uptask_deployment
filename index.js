@@ -42,6 +42,7 @@ app.use(flash());
 //Pass vardump to the application
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump;
+  res.locals.mensajes = req.flash();
   next();
 });
 

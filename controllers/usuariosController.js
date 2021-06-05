@@ -18,8 +18,12 @@ exports.crearCuenta = async (req, res) => {
     });
     res.redirect("/inicar-sesion");
   } catch (error) {
+    req.flash(
+      "error",
+      error.errors.map((error) => error.message)
+    );
     res.render("crearCuenta", {
-      errores: error.errors,
+      errores: req.flash(),
       nombrePagina: "Crear cuenta en UpTask",
     });
   }
