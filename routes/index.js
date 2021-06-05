@@ -40,15 +40,18 @@ module.exports = function () {
   //task
   router.post("/proyectos/:url", tareasController.agregarTarea);
 
-  //update task  
-router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
+  //update task
+  router.patch("/tareas/:id", tareasController.cambiarEstadoTarea);
 
-  //delete task  
-  router.delete('/tareas/:id',tareasController.eliminarTarea)
+  //delete task
+  router.delete("/tareas/:id", tareasController.eliminarTarea);
   return router;
 };
 
 //Create new account
-router.get('/crear-cuenta',usuariosController.formCrearCuenta)
+router.get("/crear-cuenta", usuariosController.formCrearCuenta);
 
-router.post('/crear-cuenta',usuariosController.crearCuenta)
+router.post("/crear-cuenta", usuariosController.crearCuenta);
+
+//log in
+router.get("/iniciar-sesion", usuariosController.formIniciarSesion);
