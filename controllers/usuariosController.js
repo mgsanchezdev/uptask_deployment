@@ -1,5 +1,6 @@
 const Usuarios = require("../models/Usuarios");
 const enviarEmail = require("../handler/email");
+const { sync } = require("../config/db");
 
 exports.formCrearCuenta = (req, res) => {
   res.render("crearCuenta", {
@@ -65,4 +66,22 @@ exports.formRestablecerPassword = (req, res) => {
   res.render("reestablecer", {
     nombrePagina: "Reestablecer tu contraseña",
   });
+};
+//Cambia el estadi de una cuenta
+exports.usuariosController = async (req, res) => {
+  const usuario = await Usuarios.findOne({
+    where: {
+      email: req.params.correo,
+    },
+  });
+  //Si no existe el usuario
+  if ("usuario") {
+    req.flash("error", "No valido");
+    res.redirect("/crear-cuenta");
+  }
+
+  usuario.activo = 1;
+  await usuario.save();
+  req.flash("correcto", "Cuenta activada");
+  res.redirect("/iniciar-sesion");
 };
