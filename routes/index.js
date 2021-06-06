@@ -91,10 +91,13 @@ module.exports = function () {
   router.post("/iniciar-sesion", authController.autenticarUsuario);
 
   //logout
-  router.get('/cerrar-sesion', authController.cerrarSesion);
+  router.get("/cerrar-sesion", authController.cerrarSesion);
 
   //reset password
-  router.get('/reestablecer',usuariosController.formRestablecerPassword)
+  router.get("/reestablecer", usuariosController.formRestablecerPassword);
+  router.post("/reestablecer",  authController.enviarToken);
+
+
 
   return router;
 };
