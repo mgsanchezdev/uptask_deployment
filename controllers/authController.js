@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op; //Se utiliza para poner condiciones de mayor o iguale nelfindone
 const crypto = require("crypto");
 const bcrypt = require("bcrypt-nodejs");
+const enviarEmail = require("../handler/email");
 
 // autenticar el usuario
 exports.autenticarUsuario = passport.authenticate("local", {
@@ -58,6 +59,14 @@ exports.enviarToken = async (req, res) => {
 
   //url de reset
   const resetUrl = `http://${req.headers.host}/reestablecer/${usuario.token}`;
+
+  //Enviar el correo con el token
+  await enviarEmail.enviar({
+    usuario,
+    subject: "Password Reset",
+    resetUrl,
+    archivo: 'reestablecer-passsword',
+  });
 };
 
 exports.validarToken = async (req, res) => {
