@@ -39,8 +39,9 @@ exports.nuevoProyecto = async (req, res) => {
     });
   } else {
     //No errors, you have to insert in the database
-
-    await Proyectos.create({ nombre });
+    //Requerimos el id
+    const usuarioId = res.locals.usuario.id;
+    await Proyectos.create({ nombre, usuarioId });
     res.redirect("/");
   }
 };
