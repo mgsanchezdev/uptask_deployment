@@ -8,7 +8,6 @@ exports.formCrearCuenta = (req, res) => {
 
 exports.formIniciarSesion = (req, res) => {
   const { error } = res.locals.mensajes;
-  console.log("Error en usuarios Controller ",error);
   res.render("iniciarSesion", {
     nombrePagina: "Iniciar Sesión en UpTask",
     error,

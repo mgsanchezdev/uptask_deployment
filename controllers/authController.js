@@ -82,7 +82,6 @@ exports.validarToken = async (req, res) => {
 //Change the password to a new one
 exports.actualizarPassword = async (req, res) => {
   //Verify valid token but also expiration date
-  console.log("token111111111111", req.params.token);
   const usuario = await Usuarios.findOne({
     where: {
       token: req.params.token,
