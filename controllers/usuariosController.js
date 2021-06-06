@@ -68,7 +68,7 @@ exports.formRestablecerPassword = (req, res) => {
   });
 };
 //Cambia el estadi de una cuenta
-exports.usuariosController = async (req, res) => {
+exports.confirmarCuenta = async (req, res) => {
   const usuario = await Usuarios.findOne({
     where: {
       email: req.params.correo,
