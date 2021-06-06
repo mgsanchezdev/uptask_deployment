@@ -1,6 +1,7 @@
 const passport = require("passport");
 const Usuarios = require("../models/Usuarios");
-
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op; //Se utiliza para poner condiciones de mayor o iguale nelfindone
 const crypto = require("crypto");
 
 // autenticar el usuario
@@ -58,7 +59,7 @@ exports.enviarToken = async (req, res) => {
   const resetUrl = `http://${req.headers.host}/reestablecer/${usuario.token}`;
 };
 
-exports.resetPassword = async (req, res) => {
+exports.validarToken = async (req, res) => {
   const usuario = await Usuarios.findOne({
     where: {
       token: req.params.token,
@@ -75,4 +76,25 @@ exports.resetPassword = async (req, res) => {
   res.render("resetpassword", {
     nombrePagina: "Reestablecer contraseña",
   });
+};
+
+//Change the password to a new one
+exports.actualizarPassword = async (req, res) => {
+  //Verify valid token but also expiration date
+  const usuario = await Usuarios.findOne({
+    where: {
+      token: req.params.token,
+      expitacion: {
+        [Op.get]: Date.now(),
+      },
+    },
+  });
+
+  //If the user exists
+  if (!usuario) {
+    req.flash("error", "No valido");
+    require.redirect("/reestablecer");
+  }
+
+  
 };
