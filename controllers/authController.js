@@ -56,10 +56,23 @@ exports.enviarToken = async (req, res) => {
 
   //url de reset
   const resetUrl = `http://${req.headers.host}/reestablecer/${usuario.token}`;
-
-  //  console.log(resetUrl)
 };
 
 exports.resetPassword = async (req, res) => {
-  res.json(req.params.token);
+  const usuario = await Usuarios.findOne({
+    where: {
+      token: req.params.token,
+    },
+  });
+
+  //if the user is not found
+  if (!usuario) {
+    req.flash("error", "No válido ");
+    res.redirect("/reestablecer");
+  }
+
+  //form to generate the password
+  res.render("resetpassword", {
+    nombrePagina: "Reestablecer contraseña",
+  });
 };
