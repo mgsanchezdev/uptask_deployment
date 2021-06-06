@@ -65,8 +65,12 @@ exports.enviarToken = async (req, res) => {
     usuario,
     subject: "Password Reset",
     resetUrl,
-    archivo: 'reestablecer-passsword',
+    archivo: "reestablecer-passsword",
   });
+
+  //Terminar la ejecucion
+  req.flash("correcto", " Se envio un mensaje a tu correo");
+  res.redirect("iniciar-sesion");
 };
 
 exports.validarToken = async (req, res) => {
