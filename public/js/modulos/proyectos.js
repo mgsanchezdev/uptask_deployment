@@ -24,7 +24,7 @@ if (btnEliminar) {
             params: { urlProyecto },
           })
           .then(function (respuesta) {
-            console.log(respuesta);
+            console.log("Respuesta el proyecto js", respuesta);
             Swal.fire("Proyecto elminado!", respuesta.data, "success");
             //redirect to home
             setTimeout(() => {

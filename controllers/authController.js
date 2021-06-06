@@ -3,6 +3,7 @@ const Usuarios = require("../models/Usuarios");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op; //Se utiliza para poner condiciones de mayor o iguale nelfindone
 const crypto = require("crypto");
+const bcrypt = require("bcrypt-nodejs");
 
 // autenticar el usuario
 exports.autenticarUsuario = passport.authenticate("local", {
@@ -81,20 +82,30 @@ exports.validarToken = async (req, res) => {
 //Change the password to a new one
 exports.actualizarPassword = async (req, res) => {
   //Verify valid token but also expiration date
+  console.log("token111111111111", req.params.token);
   const usuario = await Usuarios.findOne({
     where: {
       token: req.params.token,
-      expitacion: {
-        [Op.get]: Date.now(),
+      expiracion: {
+        [Op.gte]: Date.now(),
       },
     },
   });
 
+  console.log("actualziar password usuario controller", usuario);
   //If the user exists
   if (!usuario) {
     req.flash("error", "No valido");
     require.redirect("/reestablecer");
   }
 
-  
+  //hashear new passwod
+  usuario.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  usuario.token = null;
+  usuario.expiracion = null;
+
+  //save new pssword
+  await usuario.save();
+  req.flash("correcto", "Tu password se ha modificado correctamente");
+  res.redirect("/iniciar-sesion");
 };
