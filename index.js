@@ -55,11 +55,15 @@ app.use(
 
 app.use(passport.initialize()); //Arranca una instancia de passport
 
-app.use(passport.session());//Importante que este despues de session
+app.use(passport.session()); //Importante que este despues de session
 
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump;
   res.locals.mensajes = req.flash();
+  res.locals.usuario =
+    {
+      ...req.user,
+    } || null;
   next();
 });
 
